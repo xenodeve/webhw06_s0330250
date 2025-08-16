@@ -1,0 +1,250 @@
+/* 3D Cube Loading Animation */
+:root {
+  --cube-size: 2.75em;
+  --animation-duration: 1.5s;
+}
+
+/* Initial Loading Screen Styles */
+.initial-loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(46, 234, 157, 0.15) 0%,
+    #1a1a1a 50%,
+    #0f0f0f 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  opacity: 1;
+  transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+}
+
+.initial-loading.fade-out {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.initial-loading-content {
+  text-align: center;
+  color: #ffffff;
+}
+
+.initial-loading-text {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #00a94f;
+  margin-bottom: 2rem;
+  animation: titlePulse 2s ease-in-out infinite;
+}
+
+.initial-grid {
+  --n: 3;
+  grid-template-columns: repeat(var(--n), 2em);
+  grid-gap: 0.3em;
+  place-self: center;
+  transform: rotateX(55deg) rotate(45deg);
+  transform-style: preserve-3d;
+  display: grid;
+  margin: 2rem 0;
+}
+
+.initial-cube {
+  aspect-ratio: 1;
+  transform-origin: 50% 50% calc(-1 * 2em);
+  background: #00a94f;
+  animation: initialCubeAnimation 1.2s ease-in-out infinite;
+  transform-style: preserve-3d;
+  display: grid;
+}
+
+/* Generate positions for 3x3 grid */
+.initial-cube:nth-child(1) { animation-delay: 0s; }
+.initial-cube:nth-child(2) { animation-delay: 0.1s; }
+.initial-cube:nth-child(3) { animation-delay: 0.2s; }
+.initial-cube:nth-child(4) { animation-delay: 0.3s; }
+.initial-cube:nth-child(5) { animation-delay: 0.4s; }
+.initial-cube:nth-child(6) { animation-delay: 0.5s; }
+.initial-cube:nth-child(7) { animation-delay: 0.6s; }
+.initial-cube:nth-child(8) { animation-delay: 0.7s; }
+.initial-cube:nth-child(9) { animation-delay: 0.8s; }
+
+.initial-loading-subtitle {
+  font-size: 1rem;
+  color: #e0e0e0;
+  animation: subtitleFade 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes titlePulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.8; }
+}
+
+@keyframes initialCubeAnimation {
+  0%, 70%, 100% {
+    scale: 1 1 0;
+    opacity: 0.7;
+  }
+  35% {
+    scale: 1 1 0.8;
+    opacity: 1;
+  }
+}
+
+@keyframes subtitleFade {
+  from { opacity: 0.5; }
+  to { opacity: 1; }
+}
+
+/* Hide main content initially */
+#main-content {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+#main-content.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(46, 234, 157, 0.15) 0%,
+    #1a1a1a 50%,
+    #0f0f0f 100%
+  );
+  backdrop-filter: blur(5px);
+  display: none;
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-overlay.show {
+  display: grid;
+}
+
+.loading-content {
+  text-align: center;
+  color: #ffffff;
+}
+
+.loading-text {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: #00a94f;
+  font-weight: 600;
+}
+
+.grid {
+  --n: 4;
+  grid-template-columns: repeat(var(--n), var(--cube-size));
+  grid-gap: 0.5em;
+  place-self: center;
+  transform: rotateX(55deg) rotate(45deg);
+  transform-style: preserve-3d;
+  display: grid;
+}
+
+.cube {
+  aspect-ratio: 1;
+  transform-origin: 50% 50% calc(-1 * var(--cube-size));
+  background: #00a94f;
+  animation: cubeAnimation var(--animation-duration) ease-in-out infinite;
+  transform-style: preserve-3d;
+  display: grid;
+}
+
+/* Generate cube positions */
+.cube:nth-child(4n + 1) { --i: 0 }
+.cube:nth-child(4n + 2) { --i: 1 }
+.cube:nth-child(4n + 3) { --i: 2 }
+.cube:nth-child(4n + 4) { --i: 3 }
+
+.cube:nth-child(n + 1) { --j: 0 }
+.cube:nth-child(n + 5) { --j: 1 }
+.cube:nth-child(n + 9) { --j: 2 }
+.cube:nth-child(n + 13) { --j: 3 }
+
+.cube:nth-child(1) { --i: 0; --j: 0; animation-delay: calc((3 - 0 + 0) * 0.075s); }
+.cube:nth-child(2) { --i: 1; --j: 0; animation-delay: calc((3 - 0 + 1) * 0.075s); }
+.cube:nth-child(3) { --i: 2; --j: 0; animation-delay: calc((3 - 0 + 2) * 0.075s); }
+.cube:nth-child(4) { --i: 3; --j: 0; animation-delay: calc((3 - 0 + 3) * 0.075s); }
+.cube:nth-child(5) { --i: 0; --j: 1; animation-delay: calc((3 - 1 + 0) * 0.075s); }
+.cube:nth-child(6) { --i: 1; --j: 1; animation-delay: calc((3 - 1 + 1) * 0.075s); }
+.cube:nth-child(7) { --i: 2; --j: 1; animation-delay: calc((3 - 1 + 2) * 0.075s); }
+.cube:nth-child(8) { --i: 3; --j: 1; animation-delay: calc((3 - 1 + 3) * 0.075s); }
+.cube:nth-child(9) { --i: 0; --j: 2; animation-delay: calc((3 - 2 + 0) * 0.075s); }
+.cube:nth-child(10) { --i: 1; --j: 2; animation-delay: calc((3 - 2 + 1) * 0.075s); }
+.cube:nth-child(11) { --i: 2; --j: 2; animation-delay: calc((3 - 2 + 2) * 0.075s); }
+.cube:nth-child(12) { --i: 3; --j: 2; animation-delay: calc((3 - 2 + 3) * 0.075s); }
+.cube:nth-child(13) { --i: 0; --j: 3; animation-delay: calc((3 - 3 + 0) * 0.075s); }
+.cube:nth-child(14) { --i: 1; --j: 3; animation-delay: calc((3 - 3 + 1) * 0.075s); }
+.cube:nth-child(15) { --i: 2; --j: 3; animation-delay: calc((3 - 3 + 2) * 0.075s); }
+.cube:nth-child(16) { --i: 3; --j: 3; animation-delay: calc((3 - 3 + 3) * 0.075s); }
+
+.cube::before,
+.cube::after {
+  --face-i: 0;
+  --face-j: calc(1 - var(--face-i));
+  content: '';
+  grid-area: 1 / 1;
+  transform-origin: calc(var(--face-j) * 50%) calc(var(--face-i) * 50%);
+  translate: calc(var(--face-i) * 100%) calc(var(--face-j) * 100%);
+  rotate: var(--face-j) var(--face-i) 0 calc((2 * var(--face-i) - 1) * 90deg);
+  background: #00a94f;
+  display: block;
+}
+
+.cube::after {
+  --face-i: 1;
+  background: #007a3e;
+}
+
+@keyframes cubeAnimation {
+  0%, 50%, 100% {
+    scale: 1 1 0;
+  }
+  25% {
+    scale: 1 1 0.5;
+  }
+}
+
+/* Loading fade animation */
+@keyframes loadingFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes loadingFadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.loading-overlay.show {
+  animation: loadingFadeIn 0.3s ease-out;
+}
+
+.loading-overlay.hide {
+  animation: loadingFadeOut 0.3s ease-in forwards;
+}
