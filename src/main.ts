@@ -90,10 +90,10 @@ function updateLabelState(inputElement: HTMLInputElement, labelElement: HTMLLabe
     // เพิ่ม removing animation ก่อนลบ class
     labelElement.classList.add('removing');
     
-    // รอให้ animation จบแล้วค่อยอัปเดต
+    // รอให้ animation จบแล้วค่อยอัปเดต (ลดเวลาลง)
     setTimeout(() => {
       updateLabelStateInternal(inputElement, labelElement, value, numericValue);
-    }, 300);
+    }, 150); // ลดจาก 300ms เป็น 150ms
   } else {
     // ไม่มี state เดิม อัปเดตทันที
     updateLabelStateInternal(inputElement, labelElement, value, numericValue);
@@ -133,11 +133,11 @@ function updateLabelStateInternal(inputElement: HTMLInputElement, labelElement: 
   labelElement.classList.add('has-value');
 }
 
-// Variables สำหรับ debouncing
+// Variables สำหรับ debouncing (Optimized)
 let principalInputTimeout: number | null = null;
 let interestRateInputTimeout: number | null = null;
 
-// ฟังก์ชันสำหรับเพิ่ม event listeners ให้กับ inputs
+// ฟังก์ชันสำหรับเพิ่ม event listeners ให้กับ inputs (Optimized)
 function addInputEventListeners() {
   const principalInput = document.querySelector<HTMLInputElement>('#principal')!;
   const interestRateInput = document.querySelector<HTMLInputElement>('#interest-rate')!;
@@ -151,10 +151,10 @@ function addInputEventListeners() {
       clearTimeout(principalInputTimeout);
     }
     
-    // ตั้ง timeout ใหม่ เพื่อรอให้ผู้ใช้พิมพ์เสร็จ
+    // ลด delay เหลือ 200ms เพื่อ responsive ดีขึ้น
     principalInputTimeout = window.setTimeout(() => {
       updateLabelState(principalInput, principalLabel);
-    }, 400); // รอ 800ms หลังจากหยุดพิมพ์
+    }, 200);
   });
   
   principalInput.addEventListener('focus', () => {
@@ -175,10 +175,10 @@ function addInputEventListeners() {
       clearTimeout(interestRateInputTimeout);
     }
     
-    // ตั้ง timeout ใหม่ เพื่อรอให้ผู้ใช้พิมพ์เสร็จ
+    // ลด delay เหลือ 300ms เพื่อ responsive ดีขึ้น
     interestRateInputTimeout = window.setTimeout(() => {
       updateLabelState(interestRateInput, interestRateLabel);
-    }, 800); // รอ 800ms หลังจากหยุดพิมพ์
+    }, 300);
   });
   
   interestRateInput.addEventListener('focus', () => {
@@ -193,85 +193,91 @@ function addInputEventListeners() {
   });
 }
 
-// ฟังก์ชันสำหรับคำนวณดอกเบี้ย
+// Variables สำหรับป้องกันการกดซ้อน
+let isCalculating = false;
+
+// ฟังก์ชันสำหรับคำนวณดอกเบี้ย (Optimized)
 async function calculateInterest() {
-  const principalInput = document.querySelector<HTMLInputElement>('#principal')!;
-  const interestRateInput = document.querySelector<HTMLInputElement>('#interest-rate')!;
-  const resultContainer = document.querySelector<HTMLDivElement>('#result-container')!;
-
-  // ล้างข้อความแสดงผลก่อนหน้า
-  resultContainer.innerHTML = '';
-
-  // รับค่าจากฟอร์ม
-  const principal = parseFloat(principalInput.value);
-  const interestRate = parseFloat(interestRateInput.value);
-
-  // ตรวจสอบว่ากรอกข้อมูลครบถ้วน
-  if (isNaN(principal) || isNaN(interestRate)) {
-    toast.error('กรุณากรอกข้อมูลให้ครบถ้วน');
+  // ป้องกันการกดซ้อน
+  if (isCalculating) {
     return;
   }
+  
+  isCalculating = true;
+  const calculateBtn = document.querySelector<HTMLButtonElement>('#calculate-btn')!;
+  
+  // Disable button during calculation
+  calculateBtn.disabled = true;
+  calculateBtn.style.opacity = '0.6';
 
-  // ตรวจสอบค่าเงินต้น
-  if (principal === 0) {
-    toast.warning('เงินต้นไม่สามารถเป็น 0 ได้');
-    return;
+  try {
+    const principalInput = document.querySelector<HTMLInputElement>('#principal')!;
+    const interestRateInput = document.querySelector<HTMLInputElement>('#interest-rate')!;
+    const resultContainer = document.querySelector<HTMLDivElement>('#result-container')!;
+
+    // ล้างข้อความแสดงผลก่อนหน้า
+    resultContainer.innerHTML = '';
+
+    // รับค่าจากฟอร์ม
+    const principal = parseFloat(principalInput.value);
+    const interestRate = parseFloat(interestRateInput.value);
+
+    // ตรวจสอบว่ากรอกข้อมูลครบถ้วน
+    if (isNaN(principal) || isNaN(interestRate)) {
+      toast.error('กรุณากรอกข้อมูลให้ครบถ้วน');
+      return;
+    }
+
+    // ตรวจสอบค่าเงินต้น
+    if (principal === 0) {
+      toast.warning('เงินต้นไม่สามารถเป็น 0 ได้');
+      return;
+    }
+
+    if (principal < 0) {
+      toast.error('จำนวนเงินต้นไม่สามารถติดลบได้');
+      return;
+    }
+
+    if (interestRate < 0) {
+      toast.error('อัตราดอกเบี้ยไม่สามารถติดลบได้');
+      return;
+    }
+
+    // ตั้งค่าให้กับ calculator
+    calculator.setPrincipal(principal);
+    calculator.setInterestRate(interestRate);
+    calculator.setYears(1); // กำหนดเป็น 1 ปีตามโจทย์
+
+    // ตรวจสอบความถูกต้องของข้อมูล
+    const validation = calculator.validateInput();
+    if (!validation.isValid) {
+      toast.error(validation.message);
+      return;
+    }
+
+    // แสดง loading animation
+    loadingManager.show();
+    
+    // ใช้ requestAnimationFrame แทน setTimeout เพื่อประสิทธิภาพที่ดีกว่า
+    await new Promise(resolve => requestAnimationFrame(() => resolve(undefined)));
+    
+    // สร้าง resultData แบบ cache-friendly
+    const resultData = calculator.getResultData();
+    
+    // แสดง popup และซ่อน loading พร้อมกัน
+    popup.show(popup.createSuccessContent('ผลการคำนวณดอกเบี้ย', resultData));
+    loadingManager.hide();
+    
+    // แสดง success toast
+    toast.success('คำนวณดอกเบี้ยสำเร็จ!');
+    
+  } finally {
+    // Re-enable button และ reset state
+    isCalculating = false;
+    calculateBtn.disabled = false;
+    calculateBtn.style.opacity = '';
   }
-
-  if (principal < 0) {
-    toast.error('จำนวนเงินต้นไม่สามารถติดลบได้');
-    return;
-  }
-
-  if (interestRate < 0) {
-    toast.error('อัตราดอกเบี้ยไม่สามารถติดลบได้');
-    return;
-  }
-
-  // ตั้งค่าให้กับ calculator
-  calculator.setPrincipal(principal);
-  calculator.setInterestRate(interestRate);
-  calculator.setYears(1); // กำหนดเป็น 1 ปีตามโจทย์
-
-  // ตรวจสอบความถูกต้องของข้อมูล
-  const validation = calculator.validateInput();
-  if (!validation.isValid) {
-    toast.error(validation.message);
-    return;
-  }
-
-  // แสดง loading animation
-  loadingManager.show();
-  
-  // รอสักครู่เพื่อแสดง loading animation (จำลองการประมวลผล)
-  await new Promise(resolve => setTimeout(resolve, 150));
-  
-  // คำนวณผลลัพธ์
-  const interest = calculator.calculateSimpleInterest();
-  const total = calculator.calculateTotal();
-  
-  const resultData = {
-    'เงินต้น': `${principal.toLocaleString('th-TH', { minimumFractionDigits: 2 })} บาท`,
-    'อัตราดอกเบี้ย': `${interestRate}% ต่อปี`,
-    'ระยะเวลา': '1 ปี',
-    'ดอกเบี้ย': `${interest.toLocaleString('th-TH', { minimumFractionDigits: 2 })} บาท`,
-    'Total': `${total.toLocaleString('th-TH', { minimumFractionDigits: 2 })} บาท`
-  };
-  
-  // แสดง popup ก่อนที่จะซ่อน loading (ทำให้ต่อเนื่องกัน)
-  popup.show(popup.createSuccessContent('ผลการคำนวณดอกเบี้ย', resultData));
-  
-  // รอสักครู่แล้วค่อยซ่อน loading เพื่อให้ popup แสดงก่อน
-  await new Promise(resolve => setTimeout(resolve, 100));
-  
-  // ซ่อน loading animation
-  loadingManager.hide();
-  
-  // รอให้ loading หายไปก่อนแล้วค่อยแสดง success toast
-  // await new Promise(resolve => setTimeout(resolve, 400));
-  
-  // แสดง success toast
-  toast.success('คำนวณดอกเบี้ยสำเร็จ!');
 }
 
 // เพิ่ม Event Listener ให้กับปุ่มคำนวณ

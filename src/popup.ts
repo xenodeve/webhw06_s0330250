@@ -1,7 +1,8 @@
-// Popup utility class for displaying modal dialogs
+// Popup utility class for displaying modal dialogs (Optimized)
 export class Popup {
   private overlayElement: HTMLElement | null = null;
   private containerElement: HTMLElement | null = null;
+  private isVisible = false;
 
   constructor() {
     this.initializePopup();
@@ -27,33 +28,46 @@ export class Popup {
   }
 
   public show(content: string): void {
-    if (!this.overlayElement || !this.containerElement) return;
+    if (!this.overlayElement || !this.containerElement || this.isVisible) return;
     
+    this.isVisible = true;
     this.containerElement.innerHTML = content;
     
-    // เพิ่ม entering class สำหรับ transition เข้า
-    this.overlayElement.classList.add('entering');
-    this.overlayElement.classList.remove('exiting');
-    this.overlayElement.classList.add('active');
+    // ใช้ requestAnimationFrame เพื่อประสิทธิภาพที่ดีขึ้น
+    requestAnimationFrame(() => {
+      if (this.overlayElement) {
+        this.overlayElement.classList.add('entering');
+        this.overlayElement.classList.remove('exiting');
+        this.overlayElement.classList.add('active');
+      }
+    });
     
     // Add event listeners for close buttons
     this.addCloseEventListeners();
     
-    // Close popup when clicking on overlay
-    this.overlayElement.addEventListener('click', (e) => {
+    // Close popup when clicking on overlay (optimized)
+    const handleOverlayClick = (e: Event) => {
       if (e.target === this.overlayElement) {
         this.hide();
+        this.overlayElement?.removeEventListener('click', handleOverlayClick);
       }
-    });
+    };
+    this.overlayElement?.addEventListener('click', handleOverlayClick, { once: true });
   }
 
   public hide(): void {
-    if (!this.overlayElement) return;
+    if (!this.overlayElement || !this.isVisible) return;
     
-    // เพิ่ม exiting class สำหรับ transition ออก
-    this.overlayElement.classList.add('exiting');
-    this.overlayElement.classList.remove('entering');
-    this.overlayElement.classList.remove('active');
+    this.isVisible = false;
+    
+    // ใช้ requestAnimationFrame เพื่อประสิทธิภาพที่ดีขึ้น
+    requestAnimationFrame(() => {
+      if (this.overlayElement) {
+        this.overlayElement.classList.add('exiting');
+        this.overlayElement.classList.remove('entering');
+        this.overlayElement.classList.remove('active');
+      }
+    });
   }
 
   private addCloseEventListeners(): void {
@@ -61,10 +75,11 @@ export class Popup {
     
     const closeButtons = this.containerElement.querySelectorAll('.close, .close-popup');
     closeButtons.forEach(button => {
-      button.addEventListener('click', (e) => {
+      const handleClick = (e: Event) => {
         e.preventDefault();
         this.hide();
-      });
+      };
+      button.addEventListener('click', handleClick, { once: true });
     });
   }
 

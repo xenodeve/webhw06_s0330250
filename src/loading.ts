@@ -1,6 +1,8 @@
-// Loading Animation Module
+// Loading Animation Module (Optimized)
 export class LoadingManager {
   private loadingOverlay: HTMLElement | null = null;
+  private isVisible = false;
+  private hideTimeout: number | null = null;
 
   constructor() {
     this.createLoadingElements();
@@ -20,12 +22,12 @@ export class LoadingManager {
     loadingText.className = 'loading-text';
     loadingText.textContent = 'กำลังคำนวณ...';
     
-    // Create grid container
+    // Create grid container with fewer cubes for better performance
     const grid = document.createElement('div');
     grid.className = 'grid';
     
-    // Create 16 cubes (4x4 grid)
-    for (let i = 0; i < 16; i++) {
+    // Reduce from 16 to 9 cubes (3x3 grid) for better performance
+    for (let i = 0; i < 9; i++) {
       const cube = document.createElement('div');
       cube.className = 'cube';
       grid.appendChild(cube);
@@ -41,27 +43,47 @@ export class LoadingManager {
   }
 
   public show(): void {
-    if (this.loadingOverlay) {
-      this.loadingOverlay.classList.remove('hide');
-      this.loadingOverlay.classList.add('show');
+    if (this.loadingOverlay && !this.isVisible) {
+      this.isVisible = true;
+      
+      // Clear any pending hide timeout
+      if (this.hideTimeout) {
+        clearTimeout(this.hideTimeout);
+        this.hideTimeout = null;
+      }
+      
+      // Use requestAnimationFrame for better performance
+      requestAnimationFrame(() => {
+        if (this.loadingOverlay) {
+          this.loadingOverlay.classList.remove('hide');
+          this.loadingOverlay.classList.add('show');
+        }
+      });
     }
   }
 
   public hide(): void {
-    if (this.loadingOverlay) {
-      this.loadingOverlay.classList.remove('show');
-      this.loadingOverlay.classList.add('hide');
+    if (this.loadingOverlay && this.isVisible) {
+      this.isVisible = false;
       
-      // Remove hide class after animation completes
-      setTimeout(() => {
+      // Use requestAnimationFrame for better performance
+      requestAnimationFrame(() => {
         if (this.loadingOverlay) {
-          this.loadingOverlay.classList.remove('hide');
+          this.loadingOverlay.classList.remove('show');
+          this.loadingOverlay.classList.add('hide');
+          
+          // Remove hide class after animation completes
+          this.hideTimeout = window.setTimeout(() => {
+            if (this.loadingOverlay) {
+              this.loadingOverlay.classList.remove('hide');
+            }
+          }, 200); // Reduced from 300ms to 200ms
         }
-      }, 300);
+      });
     }
   }
 
-  public async simulateLoading(duration: number = 2000): Promise<void> {
+  public async simulateLoading(duration: number = 1000): Promise<void> {
     this.show();
     return new Promise((resolve) => {
       setTimeout(() => {

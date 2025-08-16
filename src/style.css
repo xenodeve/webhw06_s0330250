@@ -322,7 +322,7 @@ input[type="number"]::placeholder {
   color: #888888;
 }
 
-/* Button */
+/* Button (Optimized) */
 button {
   background: linear-gradient(135deg, #2eea9d 0%, #00a94f 100%);
   color: #000000;
@@ -332,17 +332,25 @@ button {
   font-size: 1.1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
   margin-top: 1rem;
+  will-change: transform; /* Optimize for transform changes */
 }
 
-button:hover {
+button:hover:not(:disabled) {
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(46, 234, 157, 0.4);
 }
 
-button:active {
+button:active:not(:disabled) {
   transform: translateY(0);
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  transform: none;
+  box-shadow: none;
 }
 
 /* Result Styles */

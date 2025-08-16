@@ -125,11 +125,12 @@
     #1a1a1a 50%,
     #0f0f0f 100%
   );
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(3px); /* Reduced blur for better performance */
   display: none;
   z-index: 9999;
   align-items: center;
   justify-content: center;
+  will-change: opacity; /* Optimize for opacity transitions */
 }
 
 .loading-overlay.show {
@@ -149,13 +150,14 @@
 }
 
 .grid {
-  --n: 4;
+  --n: 3;
   grid-template-columns: repeat(var(--n), var(--cube-size));
   grid-gap: 0.5em;
   place-self: center;
   transform: rotateX(55deg) rotate(45deg);
   transform-style: preserve-3d;
   display: grid;
+  will-change: transform; /* Optimize for animations */
 }
 
 .cube {
@@ -165,35 +167,19 @@
   animation: cubeAnimation var(--animation-duration) ease-in-out infinite;
   transform-style: preserve-3d;
   display: grid;
+  will-change: transform, scale; /* Optimize for animations */
 }
 
-/* Generate cube positions */
-.cube:nth-child(4n + 1) { --i: 0 }
-.cube:nth-child(4n + 2) { --i: 1 }
-.cube:nth-child(4n + 3) { --i: 2 }
-.cube:nth-child(4n + 4) { --i: 3 }
-
-.cube:nth-child(n + 1) { --j: 0 }
-.cube:nth-child(n + 5) { --j: 1 }
-.cube:nth-child(n + 9) { --j: 2 }
-.cube:nth-child(n + 13) { --j: 3 }
-
-.cube:nth-child(1) { --i: 0; --j: 0; animation-delay: calc((3 - 0 + 0) * 0.075s); }
-.cube:nth-child(2) { --i: 1; --j: 0; animation-delay: calc((3 - 0 + 1) * 0.075s); }
-.cube:nth-child(3) { --i: 2; --j: 0; animation-delay: calc((3 - 0 + 2) * 0.075s); }
-.cube:nth-child(4) { --i: 3; --j: 0; animation-delay: calc((3 - 0 + 3) * 0.075s); }
-.cube:nth-child(5) { --i: 0; --j: 1; animation-delay: calc((3 - 1 + 0) * 0.075s); }
-.cube:nth-child(6) { --i: 1; --j: 1; animation-delay: calc((3 - 1 + 1) * 0.075s); }
-.cube:nth-child(7) { --i: 2; --j: 1; animation-delay: calc((3 - 1 + 2) * 0.075s); }
-.cube:nth-child(8) { --i: 3; --j: 1; animation-delay: calc((3 - 1 + 3) * 0.075s); }
-.cube:nth-child(9) { --i: 0; --j: 2; animation-delay: calc((3 - 2 + 0) * 0.075s); }
-.cube:nth-child(10) { --i: 1; --j: 2; animation-delay: calc((3 - 2 + 1) * 0.075s); }
-.cube:nth-child(11) { --i: 2; --j: 2; animation-delay: calc((3 - 2 + 2) * 0.075s); }
-.cube:nth-child(12) { --i: 3; --j: 2; animation-delay: calc((3 - 2 + 3) * 0.075s); }
-.cube:nth-child(13) { --i: 0; --j: 3; animation-delay: calc((3 - 3 + 0) * 0.075s); }
-.cube:nth-child(14) { --i: 1; --j: 3; animation-delay: calc((3 - 3 + 1) * 0.075s); }
-.cube:nth-child(15) { --i: 2; --j: 3; animation-delay: calc((3 - 3 + 2) * 0.075s); }
-.cube:nth-child(16) { --i: 3; --j: 3; animation-delay: calc((3 - 3 + 3) * 0.075s); }
+/* Optimized cube positions for 3x3 grid */
+.cube:nth-child(1) { animation-delay: 0s; }
+.cube:nth-child(2) { animation-delay: 0.1s; }
+.cube:nth-child(3) { animation-delay: 0.2s; }
+.cube:nth-child(4) { animation-delay: 0.1s; }
+.cube:nth-child(5) { animation-delay: 0.2s; }
+.cube:nth-child(6) { animation-delay: 0.3s; }
+.cube:nth-child(7) { animation-delay: 0.2s; }
+.cube:nth-child(8) { animation-delay: 0.3s; }
+.cube:nth-child(9) { animation-delay: 0.4s; }
 
 .cube::before,
 .cube::after {
@@ -214,37 +200,43 @@
 }
 
 @keyframes cubeAnimation {
-  0%, 50%, 100% {
-    scale: 1 1 0;
+  0%, 70%, 100% {
+    transform: scale3d(1, 1, 0);
+    opacity: 0.7;
   }
-  25% {
-    scale: 1 1 0.5;
+  35% {
+    transform: scale3d(1, 1, 0.8);
+    opacity: 1;
   }
 }
 
-/* Loading fade animation */
+/* Optimized loading fade animations */
 @keyframes loadingFadeIn {
   from {
     opacity: 0;
+    transform: scale(0.95);
   }
   to {
     opacity: 1;
+    transform: scale(1);
   }
 }
 
 @keyframes loadingFadeOut {
   from {
     opacity: 1;
+    transform: scale(1);
   }
   to {
     opacity: 0;
+    transform: scale(0.95);
   }
 }
 
 .loading-overlay.show {
-  animation: loadingFadeIn 0.3s ease-out;
+  animation: loadingFadeIn 0.2s ease-out; /* Faster animation */
 }
 
 .loading-overlay.hide {
-  animation: loadingFadeOut 0.3s ease-in forwards;
+  animation: loadingFadeOut 0.2s ease-in forwards; /* Faster animation */
 }
