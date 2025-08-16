@@ -71,7 +71,7 @@ class InitialLoader {
 }
 
 // Initialize the initial loader
-const initialLoader = new InitialLoader();
+new InitialLoader();
 
 // สร้าง instance ของ InterestCalculator
 const calculator = new InterestCalculator();
