@@ -296,6 +296,7 @@ input[type="number"] {
   color: #ffffff;
   border-radius: 8px;
   font-size: 1rem;
+  font-family: "IBM Plex Sans Thai", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   transition: border-color 0.3s ease, background 0.3s ease;
 }
 
@@ -320,6 +321,7 @@ input[type="number"]:focus {
 
 input[type="number"]::placeholder {
   color: #888888;
+  font-family: "IBM Plex Sans Thai", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* Button (Optimized) */
@@ -331,6 +333,7 @@ button {
   border-radius: 8px;
   font-size: 1.1rem;
   font-weight: 600;
+  font-family: "IBM Plex Sans Thai", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   cursor: pointer;
   transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
   margin-top: 1rem;
