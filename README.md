@@ -72,11 +72,11 @@ webhw06_s0330250/
 │   ├── style.css                # CSS หลัก
 │   ├── logo.css                 # CSS สำหรับ logo
 │   ├── main.ts                  # Entry point หลัก
-│   └── vite-env.d.ts           # Type definitions
+│   └── vite-env.d.ts            # Type definitions
 ├── index.html                   # HTML หลัก
 ├── package.json                 # Dependencies และ scripts
-├── tsconfig.json               # TypeScript configuration
-└── README.md                   # เอกสารนี้
+├── tsconfig.json                # TypeScript configuration
+└── README.md                    # เอกสารนี้
 ```
 
 ## 🎮 วิธีใช้งาน
