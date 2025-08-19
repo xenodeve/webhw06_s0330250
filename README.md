@@ -69,8 +69,6 @@ webhw06_s0330250/
 │   ├── popup.css                # CSS สำหรับ popup
 │   ├── toast.ts                 # จัดการ toast notifications
 │   ├── toast.css                # CSS สำหรับ toast
-│   ├── themeManager.ts          # จัดการธีม (ถ้าใช้)
-│   ├── theme.css                # CSS สำหรับธีม
 │   ├── style.css                # CSS หลัก
 │   ├── logo.css                 # CSS สำหรับ logo
 │   ├── main.ts                  # Entry point หลัก
