@@ -1,4 +1,4 @@
-/* Toast Notification Styles */
+/* Toast Notification - Glass Morphism */
 #toast {
   opacity: 0;
   display: flex;
@@ -7,57 +7,69 @@
   position: fixed;
   top: 20px;
   left: 50%;
-  transform: translateX(-50%);
-  background: radial-gradient(
-    ellipse at right top,
-    rgba(255, 255, 255, 0.08) 0%,
-    rgba(26, 26, 26, 0.7) 50%,
-    rgba(15, 15, 15, 0.8) 100%
-  );
-  color: white;
+  transform: translateX(-50%) translateY(-10px);
+  background: 
+    linear-gradient(135deg, 
+      rgba(255, 255, 255, 0.15) 0%,
+      rgba(255, 255, 255, 0.08) 50%,
+      rgba(255, 255, 255, 0.12) 100%);
+  color: rgba(255, 255, 255, 0.95);
   padding: 16px 24px;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  border-radius: 16px;
+  box-shadow: 
+    0 8px 20px rgba(0, 0, 0, 0.1),
+    0 0 40px rgba(255, 255, 255, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
   z-index: 10002;
   font-size: 14px;
-  transition: all 0.5s ease-in-out;
-  backdrop-filter: blur(8px) saturate(120%);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-weight: 500;
+  letter-spacing: 0.025em;
 }
 
-/* Toast Theme Classes */
+/* Toast Theme Classes - Liquid Glass */
 /* Success Theme */
 #toast.toast-success {
-  background: radial-gradient(
-    ellipse at right top,
-    rgba(46, 234, 157, 0.15) 0%,
-    rgba(26, 26, 26, 0.7) 50%,
-    rgba(15, 15, 15, 0.8) 100%
-  );
-  border: 1px solid rgba(46, 234, 157, 0.5);
+  background: 
+    linear-gradient(135deg, 
+      rgba(34, 197, 94, 0.15) 0%,
+      rgba(255, 255, 255, 0.08) 50%,
+      rgba(34, 197, 94, 0.12) 100%);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  box-shadow: 
+    0 8px 20px rgba(0, 0, 0, 0.1),
+    0 0 40px rgba(34, 197, 94, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 #toast.toast-success:hover {
-  border-color: rgba(46, 234, 157, 0.6);
+  border-color: rgba(34, 197, 94, 0.4);
+  transform: translateX(-50%) translateY(-12px) scale(1.02);
 }
 
 #toast.toast-success .icon {
-  stroke: #2eea9d;
+  stroke: #22c55e;
 }
 
 /* Error Theme */
 #toast.toast-error {
-  background: radial-gradient(
-    ellipse at right top,
-    rgba(239, 68, 68, 0.15) 0%,
-    rgba(26, 26, 26, 0.7) 50%,
-    rgba(15, 15, 15, 0.8) 100%
-  );
-  border: 1px solid rgba(239, 68, 68, 0.5);
+  background: 
+    linear-gradient(135deg, 
+      rgba(239, 68, 68, 0.15) 0%,
+      rgba(255, 255, 255, 0.08) 50%,
+      rgba(239, 68, 68, 0.12) 100%);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  box-shadow: 
+    0 8px 20px rgba(0, 0, 0, 0.1),
+    0 0 40px rgba(239, 68, 68, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 #toast.toast-error:hover {
-  border-color: rgba(239, 68, 68, 0.6);
+  border-color: rgba(239, 68, 68, 0.4);
+  transform: translateX(-50%) translateY(-12px) scale(1.02);
 }
 
 #toast.toast-error .icon {
@@ -67,17 +79,21 @@
 
 /* Warning Theme */
 #toast.toast-warning {
-  background: radial-gradient(
-    ellipse at right top,
-    rgba(245, 158, 11, 0.15) 0%,
-    rgba(26, 26, 26, 0.7) 50%,
-    rgba(15, 15, 15, 0.8) 100%
-  );
-  border: 1px solid rgba(245, 158, 11, 0.5);
+  background: 
+    linear-gradient(135deg, 
+      rgba(245, 158, 11, 0.15) 0%,
+      rgba(255, 255, 255, 0.08) 50%,
+      rgba(245, 158, 11, 0.12) 100%);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  box-shadow: 
+    0 8px 20px rgba(0, 0, 0, 0.1),
+    0 0 40px rgba(245, 158, 11, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 #toast.toast-warning:hover {
-  border-color: rgba(245, 158, 11, 0.6);
+  border-color: rgba(245, 158, 11, 0.4);
+  transform: translateX(-50%) translateY(-12px) scale(1.02);
 }
 
 #toast.toast-warning .icon {

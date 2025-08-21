@@ -1,22 +1,28 @@
-/* 3D Cube Loading Animation */
+/* Liquid Glass Loading Animation */
 :root {
-  --cube-size: 2.75em;
-  --animation-duration: 1.5s;
+  --sphere-size: 3em;
+  --animation-duration: 2s;
 }
 
-/* Initial Loading Screen Styles */
+/* Initial Loading Screen Styles - iOS 26 Liquid Glass */
 .initial-loading {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(46, 234, 157, 0.15) 0%,
-    #1a1a1a 50%,
-    #0f0f0f 100%
-  );
+  background: 
+    radial-gradient(ellipse at top left, 
+      rgba(147, 197, 253, 0.08) 0%, 
+      transparent 50%),
+    radial-gradient(ellipse at bottom right, 
+      rgba(196, 181, 253, 0.06) 0%, 
+      transparent 50%),
+    linear-gradient(135deg, 
+      rgba(15, 23, 42, 0.98) 0%,
+      rgba(30, 41, 59, 0.95) 50%,
+      rgba(51, 65, 85, 0.92) 100%);
+  backdrop-filter: blur(10px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -38,40 +44,64 @@
 .initial-loading-text {
   font-size: 2rem;
   font-weight: 600;
-  color: #00a94f;
+  color: rgba(255, 255, 255, 0.9);
   margin-bottom: 2rem;
-  animation: titlePulse 2s ease-in-out infinite;
+  animation: liquidGlowPulse 3s ease-in-out infinite;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
 }
 
 .initial-grid {
-  --n: 3;
-  grid-template-columns: repeat(var(--n), 2em);
-  grid-gap: 0.3em;
-  place-self: center;
-  transform: rotateX(55deg) rotate(45deg);
-  transform-style: preserve-3d;
-  display: grid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
   margin: 2rem 0;
+  perspective: 1000px;
 }
 
 .initial-cube {
-  aspect-ratio: 1;
-  transform-origin: 50% 50% calc(-1 * 2em);
-  background: #00a94f;
-  animation: initialCubeAnimation 1.2s ease-in-out infinite;
-  transform-style: preserve-3d;
-  display: grid;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: 
+    radial-gradient(circle at 30% 30%, 
+      rgba(255, 255, 255, 0.4) 0%,
+      rgba(255, 255, 255, 0.15) 50%,
+      rgba(255, 255, 255, 0.05) 100%);
+  backdrop-filter: blur(10px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 
+    0 8px 16px rgba(0, 0, 0, 0.1),
+    inset 0 2px 0 rgba(255, 255, 255, 0.3),
+    0 0 30px rgba(255, 255, 255, 0.1);
+  animation: liquidSphereFloat var(--animation-duration) ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
 }
 
-/* Generate positions for 3x3 grid */
+.initial-cube::before {
+  content: '';
+  position: absolute;
+  top: 10%;
+  left: 20%;
+  width: 30%;
+  height: 30%;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.6);
+  filter: blur(8px);
+  animation: liquidShine 2s ease-in-out infinite;
+}
+
+/* Generate organic delays for 3x3 grid */
 .initial-cube:nth-child(1) { animation-delay: 0s; }
-.initial-cube:nth-child(2) { animation-delay: 0.1s; }
-.initial-cube:nth-child(3) { animation-delay: 0.2s; }
-.initial-cube:nth-child(4) { animation-delay: 0.3s; }
-.initial-cube:nth-child(5) { animation-delay: 0.4s; }
-.initial-cube:nth-child(6) { animation-delay: 0.5s; }
-.initial-cube:nth-child(7) { animation-delay: 0.6s; }
+.initial-cube:nth-child(2) { animation-delay: 0.3s; }
+.initial-cube:nth-child(3) { animation-delay: 0.6s; }
+.initial-cube:nth-child(4) { animation-delay: 0.2s; }
+.initial-cube:nth-child(5) { animation-delay: 0.5s; }
+.initial-cube:nth-child(6) { animation-delay: 0.8s; }
+.initial-cube:nth-child(7) { animation-delay: 0.4s; }
 .initial-cube:nth-child(8) { animation-delay: 0.7s; }
+.initial-cube:nth-child(9) { animation-delay: 1s; }
 .initial-cube:nth-child(9) { animation-delay: 0.8s; }
 
 .initial-loading-subtitle {
@@ -80,19 +110,42 @@
   animation: subtitleFade 1.5s ease-in-out infinite alternate;
 }
 
-@keyframes titlePulse {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.05); opacity: 0.8; }
+@keyframes liquidGlowPulse {
+  0%, 100% { 
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    transform: scale(1); 
+  }
+  50% { 
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+    transform: scale(1.02); 
+  }
 }
 
-@keyframes initialCubeAnimation {
-  0%, 70%, 100% {
-    scale: 1 1 0;
-    opacity: 0.7;
+@keyframes liquidSphereFloat {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    box-shadow: 
+      0 8px 16px rgba(0, 0, 0, 0.1),
+      inset 0 2px 0 rgba(255, 255, 255, 0.3),
+      0 0 30px rgba(255, 255, 255, 0.1);
   }
-  35% {
-    scale: 1 1 0.8;
-    opacity: 1;
+  50% {
+    transform: translateY(-15px) scale(1.1);
+    box-shadow: 
+      0 15px 25px rgba(0, 0, 0, 0.15),
+      inset 0 3px 0 rgba(255, 255, 255, 0.4),
+      0 0 40px rgba(255, 255, 255, 0.2);
+  }
+}
+
+@keyframes liquidShine {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translate(10px, -5px) scale(1.2);
+    opacity: 0.6;
   }
 }
 
@@ -113,24 +166,24 @@
   transform: translateY(0);
 }
 
+/* Main Loading Overlay - Liquid Glass */
 .loading-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(46, 234, 157, 0.15) 0%,
-    #1a1a1a 50%,
-    #0f0f0f 100%
-  );
-  backdrop-filter: blur(3px); /* Reduced blur for better performance */
+  background: 
+    radial-gradient(ellipse at center, 
+      rgba(255, 255, 255, 0.05) 0%,
+      rgba(15, 23, 42, 0.8) 50%,
+      rgba(30, 41, 59, 0.95) 100%);
+  backdrop-filter: blur(20px) saturate(180%);
   display: none;
   z-index: 9999;
   align-items: center;
   justify-content: center;
-  will-change: opacity; /* Optimize for opacity transitions */
+  will-change: opacity;
 }
 
 .loading-overlay.show {
@@ -145,36 +198,58 @@
 .loading-text {
   font-size: 1.2rem;
   margin-bottom: 2rem;
-  color: #00a94f;
+  color: rgba(255, 255, 255, 0.9);
   font-weight: 600;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+  animation: liquidGlowPulse 2s ease-in-out infinite;
 }
 
 .grid {
-  --n: 3;
-  grid-template-columns: repeat(var(--n), var(--cube-size));
-  grid-gap: 0.5em;
-  place-self: center;
-  transform: rotateX(55deg) rotate(45deg);
-  transform-style: preserve-3d;
-  display: grid;
-  will-change: transform; /* Optimize for animations */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 2rem auto;
+  perspective: 1000px;
 }
 
 .cube {
-  aspect-ratio: 1;
-  transform-origin: 50% 50% calc(-1 * var(--cube-size));
-  background: #00a94f;
-  animation: cubeAnimation var(--animation-duration) ease-in-out infinite;
-  transform-style: preserve-3d;
-  display: grid;
-  will-change: transform, scale; /* Optimize for animations */
+  width: var(--sphere-size);
+  height: var(--sphere-size);
+  border-radius: 50%;
+  background: 
+    radial-gradient(circle at 30% 30%, 
+      rgba(255, 255, 255, 0.35) 0%,
+      rgba(255, 255, 255, 0.12) 50%,
+      rgba(255, 255, 255, 0.06) 100%);
+  backdrop-filter: blur(15px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 
+    0 10px 20px rgba(0, 0, 0, 0.1),
+    inset 0 2px 0 rgba(255, 255, 255, 0.3),
+    0 0 40px rgba(255, 255, 255, 0.15);
+  animation: liquidSphereFloat var(--animation-duration) ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
 }
 
-/* Optimized cube positions for 3x3 grid */
+.cube::before {
+  content: '';
+  position: absolute;
+  top: 15%;
+  left: 25%;
+  width: 25%;
+  height: 25%;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.7);
+  filter: blur(6px);
+  animation: liquidShine 1.8s ease-in-out infinite;
+}
+
+/* Optimized sphere positions for organic motion */
 .cube:nth-child(1) { animation-delay: 0s; }
-.cube:nth-child(2) { animation-delay: 0.1s; }
-.cube:nth-child(3) { animation-delay: 0.2s; }
-.cube:nth-child(4) { animation-delay: 0.1s; }
+.cube:nth-child(2) { animation-delay: 0.2s; }
+.cube:nth-child(3) { animation-delay: 0.4s; }
 .cube:nth-child(5) { animation-delay: 0.2s; }
 .cube:nth-child(6) { animation-delay: 0.3s; }
 .cube:nth-child(7) { animation-delay: 0.2s; }

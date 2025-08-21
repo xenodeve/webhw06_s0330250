@@ -9,16 +9,25 @@ body {
   font-family: "IBM Plex Sans Thai", "Segoe UI", Tahoma, Geneva, Verdana,
     sans-serif;
   background: 
-    linear-gradient(
-      135deg,
-      rgba(35, 35, 35, 0.60) 0%,
-      rgba(26, 26, 26, 0.70) 30%,
-      rgba(15, 15, 15, 0.80) 100%
-    ),
-    /* url(https://ik.imagekit.io/xenodev/HW6/IMG_20250816_104541.jpg?updatedAt=1755315991123); */
-    url('https://ik.imagekit.io/xenodev/HW6/IMG_20250816_104936.jpg?updatedAt=1755316280166');
-  background-size: cover;
-  background-position: center;
+    /* Dynamic iOS 26 wallpaper-like gradient */
+    radial-gradient(ellipse at top left, 
+      rgba(147, 197, 253, 0.1) 0%, 
+      transparent 45%),
+    radial-gradient(ellipse at top right, 
+      rgba(196, 181, 253, 0.08) 0%, 
+      transparent 45%),
+    radial-gradient(ellipse at bottom left, 
+      rgba(251, 207, 232, 0.06) 0%, 
+      transparent 45%),
+    radial-gradient(ellipse at bottom right, 
+      rgba(254, 240, 138, 0.05) 0%, 
+      transparent 45%),
+    linear-gradient(135deg, 
+      rgba(15, 23, 42, 0.95) 0%,
+      rgba(30, 41, 59, 0.9) 30%,
+      rgba(51, 65, 85, 0.85) 100%);
+  background-size: 800px 600px, 600px 800px, 700px 500px, 500px 700px, cover;
+  background-position: -200px -100px, calc(100% + 200px) -100px, -100px calc(100% + 100px), calc(100% + 100px) calc(100% + 100px), center;
   background-attachment: fixed;
   background-repeat: no-repeat;
   min-height: 100vh;
@@ -31,41 +40,73 @@ body {
   box-sizing: border-box;
 }
 
-/* Container */
+/* Container - iOS 26 Liquid Glass */
 .container {
-  background: radial-gradient(
-    ellipse at right top,
-    rgba(46, 234, 157, 0.15) 0%,
-    rgba(26, 26, 26, 0.65) 50%,
-    rgba(15, 15, 15, 0.70) 100%
-  );
-  backdrop-filter: blur(10px) saturate(150%);
-  border: 1px solid rgba(46, 234, 157, 0.5);
-  border-radius: 15px;
-  padding: 2rem;
+  background: 
+    linear-gradient(135deg, 
+      rgba(255, 255, 255, 0.15) 0%,
+      rgba(255, 255, 255, 0.05) 50%,
+      rgba(255, 255, 255, 0.1) 100%),
+    linear-gradient(45deg, 
+      rgba(255, 255, 255, 0.08) 0%,
+      transparent 70%);
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 24px;
+  padding: 2.5rem;
   box-shadow: 
-    0 10px 30px rgba(0, 0, 0, 0.4),
-    0 0 50px rgba(46, 234, 157, 0.15);
+    0 20px 40px rgba(0, 0, 0, 0.1),
+    0 0 80px rgba(255, 255, 255, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
   max-width: 500px;
   width: 100%;
   position: relative;
-  margin: auto;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Animated shine effect */
+.container::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, 
+    transparent 30%, 
+    rgba(255, 255, 255, 0.1) 50%, 
+    transparent 70%);
+  animation: shine 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes shine {
+  0%, 100% { 
+    transform: translate(-50%, -50%) rotate(0deg); 
+    opacity: 0;
+  }
+  50% { 
+    transform: translate(-30%, -30%) rotate(45deg); 
+    opacity: 1;
+  }
 }
 
 .container:hover {
-  border-color: rgba(46, 234, 157, 0.6);
+  transform: translateY(-2px);
   box-shadow: 
-    0 15px 40px rgba(0, 0, 0, 0.7),
-    0 0 60px rgba(46, 234, 157, 0.25);
+    0 25px 50px rgba(0, 0, 0, 0.15),
+    0 0 100px rgba(255, 255, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
 }
 
 /* Header */
 h1 {
   text-align: center;
-  color: #00ec6e;
+  color: rgba(255, 255, 255, 0.9);
   margin-bottom: 2rem;
   font-size: 1.8rem;
+  text-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
 }
 
 /* Form Styles */
@@ -288,16 +329,24 @@ label.focused.has-warning {
   }
 }
 
+/* Input - Liquid Glass Style */
 input[type="number"] {
-  padding: 0.75rem;
-  border: 2px solid #404040;
-  background: rgba(26, 26, 26, 0.7);
-  backdrop-filter: blur(5px);
-  color: #ffffff;
-  border-radius: 8px;
+  padding: 0.875rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: 
+    linear-gradient(135deg, 
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0.04) 100%);
+  backdrop-filter: blur(15px) saturate(140%);
+  color: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
   font-size: 1rem;
   font-family: "IBM Plex Sans Thai", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  transition: border-color 0.3s ease, background 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
 }
 
 /* ซ่อนปุ่ม spinner ของ input number */
@@ -314,45 +363,93 @@ input[type="number"] {
 
 input[type="number"]:focus {
   outline: none;
-  border-color: #2eea9d;
-  background: rgba(26, 26, 26, 0.8);
-  box-shadow: 0 0 0 3px rgba(46, 234, 157, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+  background: 
+    linear-gradient(135deg, 
+      rgba(255, 255, 255, 0.12) 0%,
+      rgba(255, 255, 255, 0.06) 100%);
+  box-shadow: 
+    0 0 0 3px rgba(255, 255, 255, 0.1),
+    0 6px 16px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
 }
 
 input[type="number"]::placeholder {
-  color: #888888;
+  color: rgba(255, 255, 255, 0.4);
   font-family: "IBM Plex Sans Thai", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* Button (Optimized) */
+/* Button - Liquid Glass Style */
 button {
-  background: linear-gradient(135deg, #2eea9d 0%, #00a94f 100%);
-  color: #000000;
-  border: none;
+  background: 
+    linear-gradient(135deg, 
+      rgba(255, 255, 255, 0.2) 0%,
+      rgba(255, 255, 255, 0.1) 50%,
+      rgba(255, 255, 255, 0.15) 100%);
+  color: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   padding: 1rem 2rem;
-  border-radius: 8px;
+  border-radius: 16px;
   font-size: 1.1rem;
   font-weight: 600;
   font-family: "IBM Plex Sans Thai", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   cursor: pointer;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   margin-top: 1rem;
-  will-change: transform; /* Optimize for transform changes */
+  backdrop-filter: blur(10px) saturate(120%);
+  box-shadow: 
+    0 8px 16px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Button liquid ripple effect */
+button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+  transition: all 0.6s ease;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+}
+
+button:hover::before {
+  width: 200px;
+  height: 200px;
 }
 
 button:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(46, 234, 157, 0.4);
+  transform: translateY(-3px) scale(1.02);
+  background: 
+    linear-gradient(135deg, 
+      rgba(255, 255, 255, 0.25) 0%,
+      rgba(255, 255, 255, 0.15) 50%,
+      rgba(255, 255, 255, 0.2) 100%);
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 
+    0 12px 24px rgba(0, 0, 0, 0.15),
+    0 0 30px rgba(255, 255, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }
 
 button:active:not(:disabled) {
-  transform: translateY(0);
+  transform: translateY(-1px) scale(0.98);
+  transition: all 0.1s ease;
 }
 
 button:disabled {
   cursor: not-allowed;
-  opacity: 0.6;
+  opacity: 0.4;
   transform: none;
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
   box-shadow: none;
 }
 
