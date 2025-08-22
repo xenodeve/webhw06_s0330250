@@ -1,24 +1,28 @@
-# โปรแกรมคำนวณดอกเบี้ย 🧮
+# โปรแกรมคำนวณดอกเบี้ย - iOS 26 Liquid Glass Edition 🧮
 
-โปรแกรมเว็บแอปพลิเคชันสำหรับคำนวณดอกเบี้ยง่าย (Simple Interest Calculator) ที่พัฒนาด้วย TypeScript และ Vite
+โปรแกรมเว็บแอปพลิเคชันสำหรับคำนวณดอกเบี้ยง่าย (Simple Interest Calculator) ที่พัฒนาด้วย TypeScript และ Vite พร้อมด้วยการออกแบบสุดพรีเมียมในแนวทาง **iOS 26 Liquid Glass Design System**
 
 ## ✨ คุณสมบัติ
 
 - 🎯 **คำนวณดอกเบี้ยง่าย** - คำนวณดอกเบี้ยจากเงินต้น อัตราดอกเบี้ย และระยะเวลา 1 ปี
-- 🎨 **UI สวยงาม** - ใช้ฟอนต์ IBM Plex Sans Thai และ CSS3 animations
+- � **iOS 26 Liquid Glass Design** - การออกแบบสุดพรีเมียมที่ใช้เทคโนลยี Glass Morphism
+- 💎 **Backdrop Filter Effects** - เอฟเฟกต์กระจกเบลอพื้นหลังแบบ iOS แท้
+- �🎨 **UI สวยงาม** - ใช้ฟอนต์ IBM Plex Sans Thai และ CSS3 animations
 - 🔄 **Real-time Validation** - ตรวจสอบข้อมูลแบบ real-time พร้อม visual feedback
 - 📱 **Responsive Design** - รองรับการใช้งานบนอุปกรณ์ต่างๆ
-- 🌟 **Loading Animation** - หน้าจอ loading ที่สวยงามเมื่อเริ่มใช้งาน
-- 🎉 **Interactive Feedback** - Toast messages และ popup สำหรับแสดงผลลัพธ์
-- ⚡ **Performance Optimized** - ใช้ debouncing และ optimized animations
+- ⚡ **Glass Loading Animation** - หน้าจอ loading แบบ glass morphism เมื่อเริ่มใช้งาน
+- 🎉 **Interactive Feedback** - Toast messages และ popup สำหรับแสดงผลลัพธ์ในแนว Liquid Glass
+- 🔮 **Performance Optimized** - ใช้ debouncing และ optimized animations พร้อม hardware acceleration
 
 ## 🛠️ เทคโนโลยีที่ใช้
 
 - **TypeScript** - ภาษาหลักสำหรับการพัฒนา
 - **Vite** - Build tool และ development server
 - **HTML5** - โครงสร้างหน้าเว็บ
-- **CSS3** - Styling พร้อม animations และ transitions
-- **Google Fonts** - IBM Plex Sans Thai
+- **CSS3** - Styling พร้อม Glass Morphism effects, backdrop-filter และ animations
+- **iOS 26 Design System** - การออกแบบตาม Apple's Liquid Glass guidelines
+- **Backdrop Filter API** - สำหรับเอฟเฟกต์กระจกเบลอพื้นหลัง
+- **Google Fonts** - IBM Plex Sans Thai สำหรับ typography ที่สวยงาม
 
 ## 🚀 การติดตั้งและใช้งาน
 
@@ -58,25 +62,29 @@
 ## 📁 โครงสร้างโปรเจ็กต์
 
 ```
-webhw06_s0330250/
+webhw06_s0330250
 ├── public/
 │   └── vite.svg                 # Vite logo
 ├── src/
+│   ├── glass-magnifier.css      # CSS สำหรับ glass magnifier effects
 │   ├── interestCalculator.ts    # คลาสหลักสำหรับคำนวณดอกเบี้ย
+│   ├── loading.css              # CSS สำหรับ loading (Liquid Glass style)
 │   ├── loading.ts               # จัดการ loading animation
-│   ├── loading.css              # CSS สำหรับ loading
-│   ├── popup.ts                 # จัดการ popup แสดงผลลัพธ์
-│   ├── popup.css                # CSS สำหรับ popup
-│   ├── toast.ts                 # จัดการ toast notifications
-│   ├── toast.css                # CSS สำหรับ toast
-│   ├── style.css                # CSS หลัก
-│   ├── logo.css                 # CSS สำหรับ logo
 │   ├── main.ts                  # Entry point หลัก
+│   ├── popup.css                # CSS สำหรับ popup (Glass morphism)
+│   ├── popup.ts                 # จัดการ popup แสดงผลลัพธ์
+│   ├── style.css                # CSS หลัก (iOS 26 Liquid Glass theme)
+│   ├── toast.css                # CSS สำหรับ toast (Glass effect)
+│   ├── toast.ts                 # จัดการ toast notifications
 │   └── vite-env.d.ts            # Type definitions
+├── .git/                        # Git repository data
+├── .gitattributes               # Git attributes configuration
+├── .gitignore                   # Git ignore rules
 ├── index.html                   # HTML หลัก
 ├── package.json                 # Dependencies และ scripts
-├── tsconfig.json                # TypeScript configuration
-└── README.md                    # เอกสารนี้
+├── package-lock.json            # Lock file for dependencies
+├── README.md                    # เอกสารนี้
+└── tsconfig.json                # TypeScript configuration
 ```
 
 ## 🎮 วิธีใช้งาน
@@ -88,21 +96,42 @@ webhw06_s0330250/
 
 ## 🔧 คุณสมบัติพิเศษ
 
+### 🌟 iOS 26 Liquid Glass Design System
+โปรเจ็กต์นี้ใช้การออกแบบตามแนวทาง iOS 26 Liquid Glass ที่ประกอบด้วย:
+
+#### Glass Morphism Effects
+- **Backdrop Filter Blur** - เอฟเฟกต์เบลอพื้นหลังแบบกระจก `backdrop-filter: blur(20px)`
+- **Translucent Backgrounds** - พื้นหลังโปร่งแสงด้วย `rgba(255, 255, 255, 0.1)`
+- **Subtle Borders** - เส้นขอบบางๆ ด้วย `rgba(255, 255, 255, 0.2)`
+- **Multi-layered Shadows** - เงาหลายชั้นเพื่อความลึก
+
+#### Interactive Elements
+- **Glass Containers** - ทุก component ใช้ glass morphism styling
+- **Smooth Transitions** - การเปลี่ยนแปลงที่ลื่นไหลด้วย CSS transitions
+- **Hover Effects** - เอฟเฟกต์เมื่อ hover พร้อม transform และ glow
+- **Animated Light Reflection** - แสงสะท้อนเคลื่อนไหวบน title
+
+#### Typography & Visual Hierarchy
+- **IBM Plex Sans Thai** - ฟอนต์หลักสำหรับความชัดเจนและสวยงาม
+- **Gradient Text Effects** - ข้อความแบบ gradient สำหรับหัวเรื่อง
+- **Glass Text Containers** - พื้นหลังกระจกสำหรับข้อความสำคัญ
+
 ### การตรวจสอบข้อมูล
 - ❌ **ข้อมูลไม่ถูกต้อง** - แสดงไอคอน X สีแดง
 - ⚠️ **คำเตือน** - แสดงไอคอนสามเหลี่ยมสีเหลือง (เช่น เงินต้น = 0)
 - ✅ **ข้อมูลถูกต้อง** - แสดงไอคอนเช็คสีเขียว
 
 ### Animations และ Effects
-- Smooth transitions สำหรับ labels
-- Loading animation แบบ cube grid
-- Fade in/out effects
-- Hover effects สำหรับปุ่มและ elements
+- **Glass Morphism Transitions** - การเปลี่ยนแปลงแบบ glass morphism
+- **Loading animation** แบบ glass cube grid พร้อม backdrop-filter
+- **Fade in/out effects** พร้อม glass container animations  
+- **Hover effects** สำหรับปุ่มและ elements ด้วยการเปลี่ยน opacity และ blur
+- **Light Reflection Animation** - แสงสะท้อนเคลื่อนไหวบน glass surfaces
 
 ### การแสดงผลลัพธ์
-- **Popup Modal** - แสดงรายละเอียดผลลัพธ์
-- **Toast Notifications** - แสดงสถานะการทำงาน
-- **Thai Number Format** - จัดรูปแบบตัวเลขแบบไทย
+- **Glass Popup Modal** - แสดงรายละเอียดผลลัพธ์ในรูปแบบ glass morphism
+- **Glass Toast Notifications** - แสดงสถานะการทำงานด้วย translucent backgrounds
+- **Thai Number Format** - จัดรูปแบบตัวเลขแบบไทยใน glass containers
 
 ## 📊 สูตรการคำนวณ
 
@@ -120,22 +149,41 @@ webhw06_s0330250/
 
 ## 🎨 การกำหนดค่า CSS
 
-### ตัวแปรสี
-- Primary Color: `#2eea9d` (เขียวมิ้นต์)
-- Secondary Color: `#00a94f` (เขียวเข้ม)
-- Background: Gradient overlay บนรูปภาพ
-- Text Color: `#ffffff` (ขาว)
+### iOS 26 Liquid Glass Design Tokens
+- **Glass Background**: `rgba(255, 255, 255, 0.1)` - พื้นหลังโปร่งแสง
+- **Backdrop Filter**: `blur(20px) saturate(180%)` - เอฟเฟกต์เบลอและความอิ่มตัวสี
+- **Glass Borders**: `rgba(255, 255, 255, 0.2)` - เส้นขอบแบบกระจก
+- **Multi-layer Shadows**: 
+  - Outer: `0 8px 32px rgba(0, 0, 0, 0.1)`
+  - Inner: `inset 0 0 0 1px rgba(255, 255, 255, 0.2)`
+- **Text Color**: `#ffffff` - ขาวสำหรับ contrast บนพื้นหลังกระจก
 
 ### ฟอนต์
-- **IBM Plex Sans Thai** - ฟอนต์หลัก
-- Fallback: Segoe UI, Tahoma, Geneva, Verdana, sans-serif
+- **IBM Plex Sans Thai** - ฟอนต์หลักสำหรับความชัดเจนใน glass interface
+- **Fallback**: Segoe UI, Tahoma, Geneva, Verdana, sans-serif
+
+### Glass Morphism Properties
+```css
+.glass-element {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+```
 
 ## 🐛 การแก้ไขปัญหา
 
 ### ปัญหาที่อาจพบ
 1. **Build Error: unused variable** - ตรวจสอบให้แน่ใจว่าตัวแปรทั้งหมดถูกใช้งาน
 2. **Font ไม่แสดง** - ตรวจสอบการเชื่อมต่อ Google Fonts ใน HTML
-3. **Animation กระตุก** - ตรวจสอบ CSS transitions และ transforms
+3. **Glass effects ไม่ทำงาน** - ตรวจสอบ browser support สำหรับ `backdrop-filter`
+4. **Animation กระตุก** - ตรวจสอบ CSS transitions และ transforms, ใช้ `will-change` property
+5. **Performance issues** - ลด blur radius หรือใช้ `transform3d()` สำหรับ hardware acceleration
 
 ### คำสั่งที่มีประโยชน์
 ```bash
@@ -159,9 +207,14 @@ npm install
 ## 🔗 การ Deploy
 
 โปรเจ็กต์นี้สามารถ deploy บน:
-- **Vercel** - แนะนำสำหรับ Vite projects
-- **Netlify** - รองรับ static sites
-- **GitHub Pages** - สำหรับ static hosting
+- **Vercel** - แนะนำสำหรับ Vite projects (รองรับ glass effects ได้ดี)
+- **Netlify** - รองรับ static sites พร้อม modern CSS features
+- **GitHub Pages** - สำหรับ static hosting (ตรวจสอบ browser compatibility)
+
+### ข้อกำหนดสำหรับ Glass Effects
+- **Modern Browsers**: Safari 9+, Chrome 76+, Firefox 70+, Edge 17+
+- **Backdrop Filter Support**: จำเป็นสำหรับ glass morphism effects
+- **Hardware Acceleration**: แนะนำสำหรับ performance ที่ดี
 
 ### Deploy บน Vercel
 1. เชื่อมต่อ GitHub repository
