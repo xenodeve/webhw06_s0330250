@@ -5,13 +5,10 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(46, 234, 157, 0.15) 0%,
-    #1a1a1a 50%,
-    #0f0f0f 100%
-  );
-  backdrop-filter: blur(3px); /* Reduced blur for better performance */
+  background: url('https://www.iclarified.com/images/news/97556/465563/465563.jpg') no-repeat center center fixed;
+  background-size: cover;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   z-index: 10001;
   display: flex;
   align-items: center;
@@ -19,7 +16,8 @@
   opacity: 0;
   visibility: hidden;
   min-height: 100vh;
-  will-change: opacity, visibility; /* Optimize for transitions */
+  will-change: opacity, visibility;
+  font-family: "IBM Plex Sans Thai", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* Popup เข้า - ปรับให้เร็วขึ้น */
@@ -131,7 +129,7 @@
 .popup-section .card-body .icon {
   width: 4rem;
   flex-shrink: 0;
-  color: #2eea9d;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .popup-section .card-body .result-content {
@@ -140,30 +138,32 @@
 
 .popup-section .card-body h3 {
   text-align: left;
-  color: #fff;
+  color: rgba(255, 255, 255, 0.9);
   font-size: 1.4rem;
   letter-spacing: 0.035em;
   margin-top: 0.625em;
   margin-bottom: 1.2em;
   font-weight: 600;
+  font-family: "IBM Plex Sans Thai", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .popup-section .card-body .result-details p {
   text-align: left;
-  color: #cccccc;
+  color: rgba(255, 255, 255, 0.8);
   font-size: 1.1rem;
   letter-spacing: 0.031rem;
   margin-bottom: 1rem;
   line-height: 1.5;
+  font-family: "IBM Plex Sans Thai", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .popup-section .card-body .result-details .total-amount {
-  color: #00a94f !important; /* total color */
+  color: rgba(255, 255, 255, 1) !important;
   font-size: 1.2rem;
   font-weight: 600;
   margin-top: 1.5rem;
   padding-top: 1rem;
-  border-top: 2px solid #00a94f; /* total border color */
+  border-top: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 /* Progress/Button Section */
@@ -178,17 +178,23 @@
 
 .popup-section .btn-first,
 .popup-section .btn-second {
-  background: #1a1a1a;
-  border: 1px solid #404040;
-  color: #fff;
-  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px) saturate(120%);
+  -webkit-backdrop-filter: blur(10px) saturate(120%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
   padding: 0.8rem 2.5rem;
   display: inline-block;
   font-size: 1rem;
   text-decoration: none;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
   font-weight: 500;
+  font-family: "IBM Plex Sans Thai", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.1),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1);
 }
 
 .popup-section .btn-second {
@@ -197,28 +203,31 @@
 
 /* Green Theme for Success Popup */
 .popup-section .green {
-  background: radial-gradient(
-    ellipse at right top,
-    rgba(46, 234, 157, 0.15) 0%,
-    #1a1a1a 50%,
-    #0f0f0f 100%
-  );
-  border: 1px solid rgba(46, 234, 157, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.2);
 }
 
 .popup-section .green:hover {
-  border-color: rgba(46, 234, 157, 0.5);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .popup-section .green .icon {
-  color: #2eea9d;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .popup-section .green .btn-second:hover {
-  background: #00a94f;
-  color: #000;
-  border-color: #00a94f;
+  background: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 1);
+  border-color: rgba(255, 255, 255, 0.3);
   transform: translateY(-2px);
+  box-shadow: 
+    0 8px 15px rgba(0, 0, 0, 0.2),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.2);
 }
 
 /* Responsive Design */
