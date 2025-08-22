@@ -2,6 +2,7 @@ import './style.css';
 import './popup.css';
 import './toast.css';
 import './loading.css';
+import './glass-magnifier.css';
 import { InterestCalculator } from './interestCalculator';
 import { popup } from './popup';
 import { toast } from './toast';
@@ -298,3 +299,67 @@ document.querySelector<HTMLInputElement>('#interest-rate')!.addEventListener('ke
 
 // เรียกใช้ฟังก์ชันเพื่อเพิ่ม event listeners สำหรับ label effects
 addInputEventListeners();
+
+// Glass Magnifier Effect
+class GlassMagnifierEffect {
+  private container: HTMLElement | null = null;
+  private magnifier: HTMLElement | null = null;
+
+  constructor() {
+    this.init();
+  }
+
+  private init(): void {
+    // Wait for DOM to be ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => this.setup());
+    } else {
+      this.setup();
+    }
+  }
+
+  private setup(): void {
+    this.container = document.querySelector('.container');
+    if (!this.container) return;
+
+    // Add magnifier classes
+    this.container.classList.add('glass-magnifier-container');
+
+    // Create magnifier element
+    this.createMagnifier();
+
+    // Add event listeners
+    this.addEventListeners();
+  }
+
+  private createMagnifier(): void {
+    if (!this.container) return;
+
+    this.magnifier = document.createElement('div');
+    this.magnifier.className = 'glass-magnifier';
+    this.container.appendChild(this.magnifier);
+  }
+
+  private addEventListeners(): void {
+    if (!this.container || !this.magnifier) return;
+
+    // Mouse move event for magnifier tracking
+    this.container.addEventListener('mousemove', (e) => {
+      this.updateMagnifierPosition(e);
+    });
+  }
+
+  private updateMagnifierPosition(e: MouseEvent): void {
+    if (!this.magnifier || !this.container) return;
+
+    const rect = this.container.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    this.magnifier.style.left = (x - 30) + 'px';
+    this.magnifier.style.top = (y - 30) + 'px';
+  }
+}
+
+// Initialize the magnifier effect
+new GlassMagnifierEffect();

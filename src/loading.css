@@ -11,18 +11,15 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(46, 234, 157, 0.15) 0%,
-    #1a1a1a 50%,
-    #0f0f0f 100%
-  );
+  background: url('https://www.iclarified.com/images/news/97556/465563/465563.jpg') no-repeat center center fixed;
+  background-size: cover;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 10000;
   opacity: 1;
   transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+  font-family: "IBM Plex Sans Thai", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .initial-loading.fade-out {
@@ -33,12 +30,27 @@
 .initial-loading-content {
   text-align: center;
   color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 3rem 2rem;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.2);
 }
 
 .initial-loading-text {
-  font-size: 2rem;
-  font-weight: 600;
-  color: #00a94f;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: transparent;
+  background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 50%, rgba(255,255,255,0.9) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-shadow: 
+    0 2px 4px rgba(0,0,0,0.1),
+    0 0 10px rgba(255,255,255,0.3);
   margin-bottom: 2rem;
   animation: titlePulse 2s ease-in-out infinite;
 }
@@ -57,10 +69,15 @@
 .initial-cube {
   aspect-ratio: 1;
   transform-origin: 50% 50% calc(-1 * 2em);
-  background: #00a94f;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   animation: initialCubeAnimation 1.2s ease-in-out infinite;
   transform-style: preserve-3d;
   display: grid;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Generate positions for 3x3 grid */
@@ -76,8 +93,9 @@
 
 .initial-loading-subtitle {
   font-size: 1rem;
-  color: #e0e0e0;
+  color: rgba(255, 255, 255, 0.8);
   animation: subtitleFade 1.5s ease-in-out infinite alternate;
+  font-family: "IBM Plex Sans Thai", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 @keyframes titlePulse {
@@ -119,18 +137,16 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(46, 234, 157, 0.15) 0%,
-    #1a1a1a 50%,
-    #0f0f0f 100%
-  );
-  backdrop-filter: blur(3px); /* Reduced blur for better performance */
+  background: url('https://www.iclarified.com/images/news/97556/465563/465563.jpg') no-repeat center center fixed;
+  background-size: cover;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   display: none;
   z-index: 9999;
   align-items: center;
   justify-content: center;
-  will-change: opacity; /* Optimize for opacity transitions */
+  will-change: opacity;
+  font-family: "IBM Plex Sans Thai", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .loading-overlay.show {
@@ -140,13 +156,23 @@
 .loading-content {
   text-align: center;
   color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.2);
 }
 
 .loading-text {
   font-size: 1.2rem;
   margin-bottom: 2rem;
-  color: #00a94f;
+  color: rgba(255, 255, 255, 0.9);
   font-weight: 600;
+  font-family: "IBM Plex Sans Thai", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .grid {
@@ -163,11 +189,16 @@
 .cube {
   aspect-ratio: 1;
   transform-origin: 50% 50% calc(-1 * var(--cube-size));
-  background: #00a94f;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   animation: cubeAnimation var(--animation-duration) ease-in-out infinite;
   transform-style: preserve-3d;
   display: grid;
-  will-change: transform, scale; /* Optimize for animations */
+  will-change: transform, scale;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Optimized cube positions for 3x3 grid */
@@ -190,13 +221,17 @@
   transform-origin: calc(var(--face-j) * 50%) calc(var(--face-i) * 50%);
   translate: calc(var(--face-i) * 100%) calc(var(--face-j) * 100%);
   rotate: var(--face-j) var(--face-i) 0 calc((2 * var(--face-i) - 1) * 90deg);
-  background: #00a94f;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   display: block;
+  border-radius: 2px;
 }
 
 .cube::after {
   --face-i: 1;
-  background: #007a3e;
+  background: rgba(255, 255, 255, 0.2);
 }
 
 @keyframes cubeAnimation {
