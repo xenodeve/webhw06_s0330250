@@ -62,24 +62,29 @@
 ## 📁 โครงสร้างโปรเจ็กต์
 
 ```
-webhw06_s0330250/
+webhw06_s0330250
 ├── public/
 │   └── vite.svg                 # Vite logo
 ├── src/
+│   ├── glass-magnifier.css      # CSS สำหรับ glass magnifier effects
 │   ├── interestCalculator.ts    # คลาสหลักสำหรับคำนวณดอกเบี้ย
-│   ├── loading.ts               # จัดการ loading animation
 │   ├── loading.css              # CSS สำหรับ loading (Liquid Glass style)
-│   ├── popup.ts                 # จัดการ popup แสดงผลลัพธ์
+│   ├── loading.ts               # จัดการ loading animation
+│   ├── main.ts                  # Entry point หลัก
 │   ├── popup.css                # CSS สำหรับ popup (Glass morphism)
-│   ├── toast.ts                 # จัดการ toast notifications
-│   ├── toast.css                # CSS สำหรับ toast (Glass effect)
+│   ├── popup.ts                 # จัดการ popup แสดงผลลัพธ์
 │   ├── style.css                # CSS หลัก (iOS 26 Liquid Glass theme)
-│   ├── glass-icon.css           # CSS สำหรับ glass icon effects
+│   ├── toast.css                # CSS สำหรับ toast (Glass effect)
+│   ├── toast.ts                 # จัดการ toast notifications
 │   └── vite-env.d.ts            # Type definitions
+├── .git/                        # Git repository data
+├── .gitattributes               # Git attributes configuration
+├── .gitignore                   # Git ignore rules
 ├── index.html                   # HTML หลัก
 ├── package.json                 # Dependencies และ scripts
-├── tsconfig.json                # TypeScript configuration
-└── README.md                    # เอกสารนี้
+├── package-lock.json            # Lock file for dependencies
+├── README.md                    # เอกสารนี้
+└── tsconfig.json                # TypeScript configuration
 ```
 
 ## 🎮 วิธีใช้งาน
